@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Transactions</h1>
+    <form action="/transactions/add" method="POST">
+        <label for="description">Description:</label>
+        <input type="text" name="description" required>
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" required>
+        <button type="submit">Add Transaction</button>
+    </form>
+
+    <h2>All Transactions</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% transactions.forEach(transaction => { %>
+                <tr>
+                    <td><%= transaction.type %></td>
+                    <td><%= transaction.amount %></td>
+                    <td><%= transaction.date %></td>
+                    <td>
+                        <form action="/transactions/delete/<%= transaction.id %>" method="POST">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
